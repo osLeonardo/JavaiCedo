@@ -1,0 +1,1 @@
+Não é possível atravessar todas as ponts uma única vez e retornar à margem inicial, pois todas as possibilidades deixam uma ponte não atravssada ou umas das pontes será cruzada mais de uma vez.
