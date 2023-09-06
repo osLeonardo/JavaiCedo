@@ -1,1 +1,29 @@
-Não é possível atravessar todas as ponts uma única vez e retornar à margem inicial, pois todas as possibilidades deixam uma ponte não atravssada ou umas das pontes será cruzada mais de uma vez.
+__       _____                    _                    _          _____ _           _    _____ _____ _______ _ 
+\ \     / ____|                  | |                  | |        / ____| |         | |  / ____|  __ \__   __| |
+ \ \   | |  __  ___ _ __ __ _  __| | ___    _ __   ___| | ___   | |    | |__   __ _| |_| |  __| |__) | | |  | |
+  > >  | | |_ |/ _ \ '__/ _` |/ _` |/ _ \  | '_ \ / _ \ |/ _ \  | |    | '_ \ / _` | __| | |_ |  ___/  | |  | |
+ / /   | |__| |  __/ | | (_| | (_| | (_) | | |_) |  __/ | (_) | | |____| | | | (_| | |_| |__| | |      | |  |_|
+/_/     \_____|\___|_|  \__,_|\__,_|\___/  | .__/ \___|_|\___/   \_____|_| |_|\__,_|\__|\_____|_|      |_|  (_)
+                                           | |                                                                 
+                                           |_|                                                                 
+
+
+O problema das pontes de Konigsberg é um problema clássico de teoria dos grafos, proposto por Leonhard Euler em 1736, e a impossibilidade de uma solução está fundamentada na análise matemática da estrutura das pontes e das margens da cidade de Konigsberg. Para explicar cientificamente por que esse problema não tem solução, é preciso considerar alguns conceitos da teoria dos grafos.
+
+  Grafos: O problema das pontes de Konigsberg pode ser representado como um grafo, que consiste em nós (vértices) e arestas (pontes) que conectam esses nós. No caso de Konigsberg, há quatro áreas da cidade (A, B, C, D) e sete pontes que as conectam.
+
+  Grau dos nós: O grau de um nó em um grafo é o número de arestas que o conectam. Nosso objetivo é encontrar um caminho que comece e termine no mesmo nó (margem inicial), passando por todas as arestas (pontes) uma única vez. Para isso, precisaríamos que todos os nós tivessem um grau par, exceto os dois extremos, que teriam grau ímpar.
+
+Aqui está a análise científica do problema:
+
+  Nós A, B, C e D têm os seguintes graus:
+    A: 5
+    B: 3
+    C: 3
+    D: 3
+
+Nenhum dos nós tem um grau par, exceto o ponto de partida e o ponto de chegada. Isso significa que não é possível criar um caminho que cruze todas as pontes uma única vez e retorne à margem inicial, de acordo com o Teorema de Euler.
+
+O Teorema de Euler estabelece que um grafo pode ser percorrido passando por todas as arestas uma única vez e retornando ao nó inicial se e somente se o grafo tiver no máximo dois nós com grau ímpar. No problema das pontes de Konigsberg, temos quatro nós com grau ímpar, o que contraria a condição necessária para que um caminho euleriano seja possível.
+
+Portanto, de acordo com a teoria dos grafos e o Teorema de Euler, o problema das pontes de Konigsberg não tem solução, pois não é possível criar um caminho que satisfaça todas as condições necessárias.

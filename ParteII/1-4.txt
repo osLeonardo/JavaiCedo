@@ -1,0 +1,80 @@
+__       _____                    _                    _          _____ _           _    _____ _____ _______ _ 
+\ \     / ____|                  | |                  | |        / ____| |         | |  / ____|  __ \__   __| |
+ \ \   | |  __  ___ _ __ __ _  __| | ___    _ __   ___| | ___   | |    | |__   __ _| |_| |  __| |__) | | |  | |
+  > >  | | |_ |/ _ \ '__/ _` |/ _` |/ _ \  | '_ \ / _ \ |/ _ \  | |    | '_ \ / _` | __| | |_ |  ___/  | |  | |
+ / /   | |__| |  __/ | | (_| | (_| | (_) | | |_) |  __/ | (_) | | |____| | | | (_| | |_| |__| | |      | |  |_|
+/_/     \_____|\___|_|  \__,_|\__,_|\___/  | .__/ \___|_|\___/   \_____|_| |_|\__,_|\__|\_____|_|      |_|  (_)
+                                           | |                                                                 
+                                           |_|                                                                 
+
+O Teorema Euclidiano, também conhecido como Teorema da Existência de Caminho Euleriano, é um resultado fundamental na teoria dos grafos. Ele estabelece condições para a existência de um caminho que passe por todas as arestas de um grafo exatamente uma vez, esse caminho é chamado de "caminho Euleriano". O teorema é assim enunciado:
+
+Teorema Euclidiano: Um grafo não direcionado conectado possui um caminho Euleriano se e somente se possui zero ou dois vértices de grau ímpar.
+
+Isso significa que, para encontrar um caminho Euleriano em um grafo, é necessário que a quantidade de vértices de grau ímpar seja zero ou dois. Se houver zero vértices de grau ímpar, o caminho Euleriano será um circuito Euleriano (um ciclo que passa por todas as arestas do grafo exatamente uma vez). Se houver dois vértices de grau ímpar, o caminho Euleriano começará em um desses vértices e terminará no outro.
+
+Vamos dar um exemplo de aplicação do Teorema Euclidiano:
+
+Exemplo:
+Considere o seguinte grafo não direcionado:
+
+A -- B
+|    |
+C -- D
+
+Neste grafo, os vértices têm os seguintes graus:
+
+  A: grau 2
+  B: grau 2
+  C: grau 2
+  D: grau 2
+
+Todos os vértices têm grau par, o que significa que este grafo atende à condição necessária para a existência de um caminho Euleriano de acordo com o Teorema Euclidiano. Portanto, podemos encontrar um caminho Euleriano neste grafo.
+
+Um possível caminho Euleriano neste grafo seria: A -> B -> D -> C -> A.
+
+Este caminho passa por todas as arestas do grafo exatamente uma vez e começa e termina no mesmo vértice (no caso, A), formando um circuito Euleriano.
+
+Esse é um exemplo simples de como o Teorema Euclidiano pode ser aplicado para encontrar caminhos Eulerianos em grafos. Ele é uma ferramenta poderosa para resolver problemas envolvendo trajetórias em grafos.
+
+Teorema Euclidiano (reafirmação): Um grafo não direcionado conectado possui um caminho Euleriano se e somente se possui zero ou dois vértices de grau ímpar.
+
+Vamos considerar um exemplo de grafo mais complexo:
+
+A -- B -- C
+|    |    |
+D -- E -- F
+
+Neste grafo, os vértices têm os seguintes graus:
+
+  A: grau 2
+  B: grau 3
+  C: grau 2
+  D: grau 2
+  E: grau 4
+  F: grau 2
+
+Agora, vamos aplicar o Teorema Euclidiano:
+
+  Contamos o número de vértices de grau ímpar:
+    B e E têm graus ímpares (3 e 4, respectivamente).
+
+  Como temos dois vértices de grau ímpar (B e E), o Teorema Euclidiano nos diz que existe um caminho Euleriano neste grafo.
+
+Vamos encontrar um caminho Euleriano:
+
+Começamos em B (um dos vértices de grau ímpar) e exploramos as arestas do grafo. A cada passo, marcamos as arestas que visitamos. O objetivo é passar por cada aresta uma única vez.
+
+B -- A
+|    |
+C    D
+|    |
+F -- E
+
+Continuamos a seguir as arestas disponíveis até que não haja mais arestas para explorar. O caminho Euleriano neste caso seria:
+
+B -> A -> D -> C -> B -> E -> F -> E
+
+Este caminho passa por todas as arestas do grafo exatamente uma vez e começa e termina nos vértices B e E, que são os vértices de grau ímpar. Portanto, este é um caminho Euleriano válido.
+
+O Teorema Euclidiano é uma ferramenta valiosa para resolver problemas relacionados à busca de caminhos Eulerianos em grafos, e sua aplicação pode ser útil na solução de problemas práticos, como o planejamento de rotas em redes de transporte, circuitos elétricos e muito mais.
