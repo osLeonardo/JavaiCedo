@@ -1,4 +1,4 @@
-Algoritmo de Bellman ford
+Algoritmo de Bellman Ford
 
 Este algoritmo visa encontrar o menor caminho de um vértice para todos os outros presentes no grafo, 
 e pode ser aplicado em grafos ponderados ou não ponderados.
