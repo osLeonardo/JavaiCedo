@@ -1,57 +1,29 @@
-__       _____                    _                    _          _____ _           _    _____ _____ _______ _ 
-\ \     / ____|                  | |                  | |        / ____| |         | |  / ____|  __ \__   __| |
- \ \   | |  __  ___ _ __ __ _  __| | ___    _ __   ___| | ___   | |    | |__   __ _| |_| |  __| |__) | | |  | |
-  > >  | | |_ |/ _ \ '__/ _` |/ _` |/ _ \  | '_ \ / _ \ |/ _ \  | |    | '_ \ / _` | __| | |_ |  ___/  | |  | |
- / /   | |__| |  __/ | | (_| | (_| | (_) | | |_) |  __/ | (_) | | |____| | | | (_| | |_| |__| | |      | |  |_|
-/_/     \_____|\___|_|  \__,_|\__,_|\___/  | .__/ \___|_|\___/   \_____|_| |_|\__,_|\__|\_____|_|      |_|  (_)
-                                           | |                                                                 
-                                           |_|                                                                 
+Consideremos um grafo não direcionado simples, onde os vértices representam cidades e as arestas representam estradas que conectam as cidades. 
+Encontre um circuito que visite todas as cidades uma única vez e retorne à cidade de origem.
 
+As estradas se conectam da seguinte forma:
+    Cidade A está conectada a B e C.
+    Cidade B está conectada a A e D.
+    Cidade C está conectada a A e D.
+    Cidade D está conectada a B e C.
 
-O Teorema Euclidiano, em sua forma clássica, é um resultado da geometria que trata da existência de triângulos retângulos com lados de comprimentos inteiros. No entanto, não está diretamente relacionado a circuitos de grafos, que é um campo da matemática discreta. Portanto, não é possível aplicar o Teorema Euclidiano diretamente a um circuito de grafos.
+Podemos encontrar, por exemplo, o seguinte circuito:
+    A -> B -> D -> C -> A
 
-O Teorema de Euclides é comumente enunciado da seguinte forma: "Para qualquer par de números inteiros positivos a e b, onde a > b, existe um único par de números inteiros positivos x e y que satisfaz a equação a² = b² + c², onde c é a hipotenusa de um triângulo retângulo." Isso é um resultado geométrico e não tem uma aplicação direta em circuitos de grafos.
-
-No entanto, podemos discutir uma aplicação mais ampla da teoria dos grafos em problemas de circuitos, como encontrar caminhos ou ciclos em um grafo. Por exemplo, consideremos um grafo não direcionado simples, onde os vértices representam cidades e as arestas representam estradas que conectam as cidades. Podemos usar a teoria dos grafos para encontrar um circuito que visite todas as cidades uma única vez e retorne à cidade de origem. Isso é conhecido como o Problema do Caixeiro Viajante.
-
-Suponha que temos as cidades A, B, C e D, com estradas conectando-as da seguinte forma:
-
-    A está conectada a B e C.
-    B está conectada a A e D.
-    C está conectada a A e D.
-    D está conectada a B e C.
-
-Agora, podemos usar a teoria dos grafos para encontrar um circuito que comece em uma cidade, visite todas as outras cidades uma única vez e retorne à cidade de origem. Por exemplo, podemos encontrar o seguinte circuito:
-
-A -> B -> D -> C -> A
-
-Este é um exemplo de aplicação da teoria dos grafos em um problema de circuito, que é um conceito diferente do Teorema de Euclides, mas também é uma aplicação interessante em matemática discreta.
-
-Claro, vou elaborar mais sobre a aplicação da teoria dos grafos em problemas de circuitos, especificamente no contexto de circuitos em grafos não direcionados.
-
-Em teoria dos grafos, um circuito é um caminho fechado em um grafo, onde um caminho é uma sequência de vértices conectados por arestas, e um circuito é um caminho que começa e termina no mesmo vértice. Um exemplo clássico de problema que envolve circuitos em grafos é o Problema do Caixeiro Viajante (Traveling Salesman Problem, TSP).
-
-O Problema do Caixeiro Viajante consiste em encontrar o circuito hamiltoniano de menor custo em um grafo ponderado, onde cada vértice representa uma cidade, cada aresta representa uma estrada entre duas cidades e cada aresta tem um peso que representa o custo de viajar entre essas cidades. O objetivo é encontrar um circuito que visite todas as cidades exatamente uma vez e retorne à cidade de origem, minimizando o custo total.
-
-Por exemplo, considere um conjunto de cidades com estradas ponderadas entre elas:
-
+Considere um conjunto de cidades com estradas ponderadas entre elas:
     Cidade A está conectada a B, C e D.
     Cidade B está conectada a A, C e D.
     Cidade C está conectada a A, B e D.
     Cidade D está conectada a A, B e C.
 
 E uma matriz de adjacência que representa os custos de viagem entre as cidades:
+        A   B   C   D
+    A   0   5   8   6
+    B   5   0   7   9
+    C   8   7   0   4
+    D   6   9   4   0
 
-   A   B   C   D
-A  0   5   8   6
-B  5   0   7   9
-C  8   7   0   4
-D  6   9   4   0
-
-O objetivo é encontrar um circuito hamiltoniano que visite todas as cidades exatamente uma vez e retorne à cidade de origem, minimizando o custo total. Uma possível solução seria:
-
-A -> B -> C -> D -> A
+Uma possível solução seria:
+    A -> B -> C -> D -> A
 
 Este circuito tem um custo total de 26 unidades, que é o menor custo possível para visitar todas as cidades uma única vez e retornar à cidade de origem.
-
-O Problema do Caixeiro Viajante é um problema NP-completo, o que significa que não existe um algoritmo eficiente conhecido para resolvê-lo em todos os casos. No entanto, existem algoritmos de aproximação e heurísticas que podem fornecer soluções boas o suficiente em tempo razoável para muitas instâncias práticas.
