@@ -1,0 +1,31 @@
+Passo 1: Inicialização
+Nós não visitados: A, B, C, D, E, F, G, H
+Tabela de distâncias mínimas:
+A: 0 (A é o nó de origem)
+B: nulo
+C: nulo
+D: nulo
+E: nulo
+F: nulo
+G: nulo
+H: nulo
+Passo 2: Escolha o nó mais próximo não visitado
+O nó A é o nó mais próximo não visitado, com uma distância de 0.
+Passo 3: Atualização das distâncias mínimas
+Agora, vamos atualizar as distâncias mínimas dos nós vizinhos de A e sua sequência:
+A -> C: 2 (atualização da distância de C)
+C -> D: 2 (atualização da distância de D)
+D -> E: 1 (atualização da distância de E)
+E -> G: 1 (atualização da distância de G)
+G -> F: 0 (atualização da distância de F)
+F -> H: 3 (atualização da distância de H)
+Tabela de distâncias mínimas atualizada:
+A: 0
+B: nulo
+C: 2
+D: 4
+E: 5
+F: 6
+G: 6
+H: 9
+Portanto, o caminho mais curto de A para H é A -> C -> D -> E -> G -> F->H, com uma distância total de 2 + 2 + 1 + 1 + 0 + 3 = 9 unidades, de acordo com os pesos das arestas no grafo.

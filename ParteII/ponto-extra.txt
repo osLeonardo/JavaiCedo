@@ -1,0 +1,1 @@
+A -> C = 1 C -> F = 4 F -> J = 2 J -> M = 2 M -> O = 2 O -> B = 2 Custo Total = 13
