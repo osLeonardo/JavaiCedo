@@ -1,0 +1,42 @@
+Aplicando o método de Dijkstra
+Passo 1: Inicialização
+Nós não visitados: A, B, C, D, E, F
+Tabela de distâncias mínimas:
+A: 0 (A é o nó de origem)
+
+
+Passo 2: Escolher o nó mais próximo não visitado O nó A é o nó mais próximo não visitado, com uma distância de 0.
+Passo 3: Atualização das distâncias mínimas. As distâncias mínimas dos nós vizinhos de A:
+A -> B: 8 (atualização da distância de B)
+A -> C: 2 (atualização da distância de C)
+Tabela de distâncias mínimas atualizada:
+A: 0
+B: 8
+C: 2
+Passo 4: Escolha o próximo nó mais próximo não visitado O nó C é o nó mais próximo não visitado, com uma distância de 2.
+Passo 5: Atualização das distâncias mínimas As distâncias mínimas dos nós vizinhos de C:
+C -> D: 2 (atualização da distância de D)
+C -> E:5 (atualização da distância de E)
+Tabela de distâncias mínimas atualizada:
+A: 0
+B: 3
+C: 2
+D: 10
+E: 12
+F: nulo
+Passo 6: Continue escolhendo e atualizando os nós mais próximos não visitados até que todos os nós tenham sido visitados.
+Próximo nó mais próximo: B (com distância 3)
+Atualização de D: 8 (B -> D)
+Próximo nó mais próximo: D (com distância 8)
+Atualização de E: 10 (D -> E)
+Atualização de F: 14 (D -> F)
+Próximo nó mais próximo: E (com distância 10)
+Próximo nó mais próximo: F (com distância 12)
+A tabela final de distâncias mínimas será:
+A: 0
+B: 3
+C: 2
+D: 8
+E: 10
+F: 12
+com as distâncias mínimas corrigidas de A para todos os outros nós no grafo. O caminho mais curto de A para F é A -> C -> B -> D -> E -> F, com uma distância total de 12
