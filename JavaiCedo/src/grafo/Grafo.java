@@ -43,7 +43,7 @@ public class Grafo {
 			int degree = getDegree(v);
 			int inDegree = getInDegree(v);
 			System.out.println("Grau de emissão de "+v.getNome()+": "+degree);
-			System.out.println("Grau de recepção de "+v.getNome()+": "+inDegree);
+			System.out.println("Grau de recepção de "+v.getNome()+": "+inDegree );
 		}
 	}
 	
