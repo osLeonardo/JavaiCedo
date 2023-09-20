@@ -38,6 +38,7 @@ public class Teste {
 			Map<String, Integer> errors = new HashMap<>();
 			List<List<Integer>> apartamentsMatrix = new ArrayList<>();
 			Integer indice = 0;
+			Integer indiceAux = 0;
 			Integer apt= 0;
 			Integer indexNegativo = 0;
 			Integer indexDuplicado = 0;
@@ -49,15 +50,21 @@ public class Teste {
 					continue;
 				}
 				indice+=1;
-				String[] lineArray = line.split(" ");				
+				String[] lineArray = line.split(" ");
+				
 				
 				if(lineArray[1].equals("TRAILER33") ) {
+					if(indice - 2 != 33) {
+						throw new RuntimeException("Erro: O Número de nós está errado");
+					}
+					
 					break;
 				}
 			
 				Integer apartament = Integer.parseInt(lineArray[1]);
 				if (apartament >= 0 && !apartaments.contains(apartament)) {
 					apartaments.add(apartament);
+					indiceAux++;
 				} else {
 					
 					if(apartament <=0) {
@@ -71,7 +78,6 @@ public class Teste {
 				}
 				
 			}
-			
 			
 			br.close();
 			
