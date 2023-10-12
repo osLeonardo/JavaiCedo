@@ -20,8 +20,7 @@ import java.util.stream.Collectors;
 
 public class Teste {
 
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {		
 		try {
 			FileInputStream fis = new FileInputStream("C:\\Temp\\configs.txt");
 			DataInputStream dis = new DataInputStream(fis);
@@ -80,7 +79,6 @@ public class Teste {
 			}
 			
 			br.close();
-			
 			
 			for (Integer apart : apartaments) {
 				Grafo g = new Grafo();

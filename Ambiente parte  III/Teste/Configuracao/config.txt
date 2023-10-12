@@ -1,0 +1,2 @@
+Processado=C:\Teste\Processado
+Não Processado=C:\Teste\NaoProcessado
