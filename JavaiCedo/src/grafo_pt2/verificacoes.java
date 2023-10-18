@@ -20,8 +20,14 @@ public class verificacoes {
 				String caminhoConfiguracao = caminhoTeste + "\\" + "Configuracao";
 				String caminhoConfigTxt = caminhoConfiguracao + "\\config.txt";
 				String rotaNN = caminhoTeste + "\\rotaNN.txt";
+				String caminhodiretorioProcessados = caminhoTeste + "\\" + "Processados";
+				String caminhodiretorioNaoProcessados = caminhoTeste + "\\" + "Não Processados";
+				String nomeArquivoProcessado = caminhodiretorioProcessados + "\\Processado.txt";
+				String nomeArquivoNaoProcessado = caminhodiretorioNaoProcessados + "\\Não Processado.txt";
 				
 				File diretorioTeste = new File(caminhoTeste);
+				File diretorioProcessados = new File(caminhodiretorioProcessados);
+				File diretorioNaoProcessados = new File(caminhodiretorioNaoProcessados);
 				
 				
 				
@@ -35,6 +41,24 @@ public class verificacoes {
 						System.out.println("Diretório 'Teste' criado com sucesso!");
 					} else {
 						System.out.println("Não foi possível criar o diretório 'Teste'.");
+					}
+				}
+				
+				if(!diretorioProcessados.exists() && !diretorioProcessados.isDirectory()) {					
+					boolean criadoTesteComSucesso = diretorioProcessados.mkdirs();
+					if(criadoTesteComSucesso) {
+						System.out.println("Diretório 'Processado' criado com sucesso!");
+					} else {
+						System.out.println("Não foi possível criar o diretório 'Processado'.");
+					}
+				}
+				
+				if(!diretorioNaoProcessados.exists() && !diretorioNaoProcessados.isDirectory()) {
+					boolean criadoTesteComSucesso = diretorioNaoProcessados.mkdirs();
+					if(criadoTesteComSucesso) {
+						System.out.println("Diretório 'Não Processado' criado com sucesso!");
+					} else {
+						System.out.println("Não foi possível criar o diretório 'Não Processado'.");
 					}
 				}
 				
@@ -148,6 +172,7 @@ public class verificacoes {
 					Integer sumOfWeights = 0;
 					String linha;
 					Integer contagemLinhas = 0;
+					Integer contagemLinhasPesos = 0;
 					Boolean vazio = true;
 					String headerTotalNumberOfNodes = null;
 					Integer headerSumOfArestsWeights = 0;
@@ -192,6 +217,7 @@ public class verificacoes {
 								origin = originAndDestiny[0];								
 								destiny = originAndDestiny[1];
 								weight = Integer.parseInt(linha.split("=")[1]);
+								contagemLinhasPesos+=1;
 								formattedLines.add(new Model(linha.substring(0, 2), origin, destiny, weight));
 							} else if (linha.startsWith("09")) {
 								String[] totals = linha.substring(2).split("=");
@@ -242,23 +268,166 @@ public class verificacoes {
 					} else {
 						System.out.println("Número de linhas iguais.(resumo)");
 					}
-					if ( !headerSumOfArestsWeights.toString().equals(String.format("%02d", trailerNumberOfWeightLines))) {
+					if ( !String.format("%02d",contagemLinhasPesos).toString().equals(String.format("%02d", trailerNumberOfWeightLines))) {
+						System.out.println(contagemLinhasPesos.toString());
+						System.out.println(trailerNumberOfWeightLines);
 						throw new Exception("Número de linhas diferentes. (peso)");
 					} else {
 						System.out.println("Número de linhas iguais.(peso)");
 					}
 					
+					
+					
+					try {
+						File GrafoProcessado = new File(nomeArquivoProcessado);
+						boolean criadoTxtComSucesso;
+						criadoTxtComSucesso = GrafoProcessado.createNewFile();
+						if(criadoTxtComSucesso) {
+							OutputStream os = new FileOutputStream(nomeArquivoProcessado);
+							OutputStreamWriter osw =  new OutputStreamWriter(os);
+							BufferedWriter writer = new BufferedWriter(osw);
+							
+							
+							while((linha = bufferedReader.readLine()) != null) {
+								writer.append(linha);
+								writer.append("\r\n");
+							}
+							
+							
+							writer.flush();
+							System.out.println("O arquivo processo com sucesso e movido para a pasta Processado.");
+						} else {
+							System.out.println("Não foi possível criar o diretório 'processado.txt'.");
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
+					try {
+						File GrafoProcessado = new File(nomeArquivoNaoProcessado);
+						boolean criadoTxtComSucesso;
+						criadoTxtComSucesso = GrafoProcessado.createNewFile();
+						if(criadoTxtComSucesso) {
+							OutputStream os = new FileOutputStream(nomeArquivoNaoProcessado);
+							OutputStreamWriter osw =  new OutputStreamWriter(os);
+							BufferedWriter writer = new BufferedWriter(osw);
+							
+							FileReader fileReader = new FileReader(rotaNN);
+							BufferedReader bufferedReader = new BufferedReader(fileReader);
+							String linha;
+							while((linha = bufferedReader.readLine()) != null) {
+								writer.append(linha);
+								writer.append("\r\n");
+							}
+							
+							
+							writer.flush();
+							System.out.println("O arquivo processado sem sucesso e movido para a pasta NãoProcessado.");
+						} else {
+							System.out.println("Não foi possível criar o diretório 'Não processado.txt'.");
+						}
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					e.printStackTrace();
 				} catch (RuntimeException e) {
+					try {
+						File GrafoProcessado = new File(nomeArquivoNaoProcessado);
+						boolean criadoTxtComSucesso;
+						criadoTxtComSucesso = GrafoProcessado.createNewFile();
+						if(criadoTxtComSucesso) {
+							OutputStream os = new FileOutputStream(nomeArquivoNaoProcessado);
+							OutputStreamWriter osw =  new OutputStreamWriter(os);
+							BufferedWriter writer = new BufferedWriter(osw);
+							
+							FileReader fileReader = new FileReader(rotaNN);
+							BufferedReader bufferedReader = new BufferedReader(fileReader);
+							String linha;
+							while((linha = bufferedReader.readLine()) != null) {
+								writer.append(linha);
+								writer.append("\r\n");
+							}
+							
+							
+							writer.flush();
+							System.out.println("O arquivo processado sem sucesso e movido para a pasta NãoProcessado.");
+						} else {
+							System.out.println("Não foi possível criar o diretório 'Não processado.txt'.");
+						}
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					e.printStackTrace();
 				} catch (IOException e) {
+					try {
+						File GrafoProcessado = new File(nomeArquivoNaoProcessado);
+						boolean criadoTxtComSucesso;
+						criadoTxtComSucesso = GrafoProcessado.createNewFile();
+						if(criadoTxtComSucesso) {
+							OutputStream os = new FileOutputStream(nomeArquivoNaoProcessado);
+							OutputStreamWriter osw =  new OutputStreamWriter(os);
+							BufferedWriter writer = new BufferedWriter(osw);
+							
+							FileReader fileReader = new FileReader(rotaNN);
+							BufferedReader bufferedReader = new BufferedReader(fileReader);
+							String linha;
+							while((linha = bufferedReader.readLine()) != null) {
+								writer.append(linha);
+								writer.append("\r\n");
+							}
+							
+							
+							writer.flush();
+							System.out.println("O arquivo processado sem sucesso e movido para a pasta NãoProcessado.");
+						} else {
+							System.out.println("Não foi possível criar o diretório 'Não processado.txt'.");
+						}
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (Exception e) {
+					try {
+						File GrafoProcessado = new File(nomeArquivoNaoProcessado);
+						boolean criadoTxtComSucesso;
+						criadoTxtComSucesso = GrafoProcessado.createNewFile();
+						if(criadoTxtComSucesso) {
+							OutputStream os = new FileOutputStream(nomeArquivoNaoProcessado);
+							OutputStreamWriter osw =  new OutputStreamWriter(os);
+							BufferedWriter writer = new BufferedWriter(osw);
+							
+							FileReader fileReader = new FileReader(rotaNN);
+							BufferedReader bufferedReader = new BufferedReader(fileReader);
+							String linha;
+							while((linha = bufferedReader.readLine()) != null) {
+								writer.append(linha);
+								writer.append("\r\n");
+							}
+							
+							
+							writer.flush();
+							System.out.println("O arquivo processado sem sucesso e movido para a pasta NãoProcessado.");
+						} else {
+							System.out.println("Não foi possível criar o diretório 'Não processado.txt'.");
+						}
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					e.printStackTrace();
 				}
+				
+				
+				
+				
+				
 			
 				
 
