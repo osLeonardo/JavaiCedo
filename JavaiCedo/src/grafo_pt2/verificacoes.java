@@ -26,7 +26,7 @@ public class verificacoes {
 				
 				
 				if(diretorioTeste.exists() && diretorioTeste.isDirectory()) {
-					System.out.println("O diretório 'Teste'existe.");
+					//System.out.println("O diretório 'Teste'existe.");
 				} else {
 					System.out.println("O diretório 'Teste' não existe ou não é um diretório.");
 					
@@ -44,7 +44,7 @@ public class verificacoes {
 				File diretorioConfiguracao = new File(caminhoConfiguracao);
 				
 				if(diretorioConfiguracao.exists() && diretorioConfiguracao.isDirectory()) {
-					System.out.println("O diretório 'Configuracao' existe.");
+					//System.out.println("O diretório 'Configuracao' existe.");
 				} else {
 					System.out.println("O diretório 'Configuracao' não existe ou não é um diretório.");
 					
@@ -61,7 +61,7 @@ public class verificacoes {
 				File diretorioConfigTxt = new File(caminhoConfigTxt);
 				
 				if(diretorioConfigTxt.exists() && diretorioConfigTxt.isFile()) {
-					System.out.println("O arquivo 'config.txt' existe");
+					//System.out.println("O arquivo 'config.txt' existe");
 				} else {
 					System.out.println("O arquivo 'config.txt' não existe ");
 					
@@ -69,7 +69,7 @@ public class verificacoes {
 					try {
 						criadoConfigTxtComSucesso = diretorioConfigTxt.createNewFile();
 						if(criadoConfigTxtComSucesso) {
-							System.out.println("Diretório 'config.txt' criado com sucesso!");
+							//System.out.println("Diretório 'config.txt' criado com sucesso!");
 						} else {
 							System.out.println("Não foi possível criar o diretório 'config.txt'.");
 						}
@@ -90,12 +90,13 @@ public class verificacoes {
 					int contagemLinhas= 0;
 					
 					while((linha = bufferedReader.readLine()) != null) {
-						System.out.println(linha);
+						//System.out.println(linha);
 						String[] linhaArray = linha.split("C:");
 						vazio = false;
 						contagemLinhas++;
+						System.out.println(contagemLinhas);
 						if(contagemLinhas == 2) {
-							System.out.println("Segunda linha existe");
+							//System.out.println("Segunda linha existe");
 						}
 						try {
 							if(linhaArray[0].equals("Processado@")) {
@@ -137,16 +138,18 @@ public class verificacoes {
 				}
 				
 				
-				// validação 1.6
+				// validação 1.6 e 1.7 e 1.8
 				
 				try {
 					FileReader fileReader = new FileReader(rotaNN);
 					BufferedReader bufferedReader = new BufferedReader(fileReader);
 					
+					List<String> uniqueNodesTotal = new ArrayList<>();
+					Integer sumOfWeights = 0;
 					String linha;
 					Integer contagemLinhas = 0;
 					Boolean vazio = true;
-					Integer headerTotalNumberOfNodes = 0;
+					String headerTotalNumberOfNodes = null;
 					Integer headerSumOfArestsWeights = 0;
 					Integer trailerNumberOfConnectionLines = 0;
 					Integer trailerNumberOfWeightLines = 0;
@@ -155,86 +158,106 @@ public class verificacoes {
 					List<Model> formattedLines = new ArrayList<>();
 					
 					while((linha = bufferedReader.readLine()) != null) {
-						System.out.println(linha);
+						
+						//System.out.println(linha);
 						String[] linhaArray = linha.split("C:");
 						vazio = false;
 						contagemLinhas++;
-						String identifier = linha.substring(0, 2);
-						Integer origin;
-						Integer destiny;
+						//String identifier = linha.substring(0, 2);
+						String origin;
+						String destiny;
 						Integer weight;
 						
-						if (identifier.equals("00")) {
+						System.out.println(contagemLinhas);
+						if (linha.startsWith("00")) {
 							if (linha.length() != 6) {
+								// verificação 1.8
 								throw new Exception("Header inválido");
 							}
-							headerTotalNumberOfNodes = Integer.parseInt(linha.substring(2, 4));
+							headerTotalNumberOfNodes = linha.substring(2, 4);
 							headerSumOfArestsWeights =  Integer.parseInt(linha.substring(4));
-						} else if (identifier.equals("01")) {
-							if (linha.length() != 7) {
-								throw new Exception("Resumo de conexões inválido");
-							}
-							
-							String[] originAndDestiny = linha.substring(2).split("=");
-							origin = Integer.parseInt(originAndDestiny[0]);
-							destiny = Integer.parseInt(originAndDestiny[1]);
-							formattedLines.add(new Model(identifier, origin, destiny));
-						} else if (identifier.equals("02")) {
-							String[] originAndDestiny = linha.substring(2).split(";");
-							origin = Integer.parseInt(originAndDestiny[0]);
-							destiny = Integer.parseInt(originAndDestiny[1]);
-							weight = Integer.parseInt(linha.split("=")[1]);
-							formattedLines.add(new Model(identifier, origin, destiny, weight));
-						} else if (identifier.equals("09")) {
-							String[] totals = linha.substring(2).split("=");
-							String[] totalOfEachLineKind = totals[0].split(";");
-							trailerNumberOfConnectionLines = Integer.parseInt(totalOfEachLineKind[0]);
-							trailerNumberOfWeightLines = Integer.parseInt(totalOfEachLineKind[1]);
-							trailerSumOfWeights = Integer.parseInt(totals[1]);
+							} else if (linha.startsWith("01")) {
+								if (linha.length() != 7 || !linha.substring(4,5).equals("=")) {
+									// verificação 1.9
+									throw new Exception("Resumo de conexões inválido");
+								}
+								//System.out.println("esss aqui");
+								String[] originAndDestiny = linha.substring(2).split("=");
+								origin = originAndDestiny[0];
+								destiny = originAndDestiny[1];
+								//System.out.println("entrou aqui");
+								formattedLines.add(new Model(linha.substring(0, 2), origin, destiny));
+							} else if (linha.startsWith("02")) {
+								String[] originAndDestiny = linha.substring(2).split(";");
+								origin = originAndDestiny[0];								
+								destiny = originAndDestiny[1];
+								weight = Integer.parseInt(linha.split("=")[1]);
+								formattedLines.add(new Model(linha.substring(0, 2), origin, destiny, weight));
+							} else if (linha.startsWith("09")) {
+								String[] totals = linha.substring(2).split("=");
+								String[] totalOfEachLineKind = totals[0].split(";");
+								trailerNumberOfConnectionLines = Integer.parseInt(totalOfEachLineKind[0]);
+								trailerNumberOfWeightLines = Integer.parseInt(totalOfEachLineKind[1]);
+								trailerSumOfWeights = Integer.parseInt(totals[1]);
 						}
+					
 						
-						try {
-							if(linhaArray[0].equals("Processado@")) {
+						if(linhaArray[0].equals("Processado@")) {
+						throw new RuntimeException("Há @ no lugar de =");
+								}
+								if(linhaArray[0].equals("Não Processado@")) {
 								throw new RuntimeException("Há @ no lugar de =");
-							}
-							if(linhaArray[0].equals("Não Processado@")) {
-								throw new RuntimeException("Há @ no lugar de =");
-							}
-						} catch (RuntimeException e) {
-							System.out.println(e);
-							return;
+								}
+						
+								List<String> uniqueNodes = new ArrayList<>();
+								List<Integer> uniqueWeight = new ArrayList<>();
+								Integer peso = 0;
+								for (Model model : formattedLines) {
+							
+									if (!uniqueNodes.contains(model.getOrigem()) && model.getPeso() == null) {
+										uniqueNodes.add(model.getOrigem());
+									}
+									if (!uniqueNodes.contains(model.getDestino()) && model.getPeso() == null) {
+										uniqueNodes.add(model.getDestino());	
+									}
+									
+									if (model.getPeso() != null) {
+										uniqueWeight.add(model.getPeso());
+										peso+= model.getPeso();
+									}
+								}
+								sumOfWeights = peso;
+								uniqueNodesTotal = uniqueNodes;
+									
 						}
-					}
-					
-					List<Integer> uniqueNodes = new ArrayList<>();
-					Integer sumOfWeights = 0;
-					for (Model model : formattedLines) {
-						if (!uniqueNodes.contains(model.getOrigem())) {
-							uniqueNodes.add(model.getOrigem());
-						}
-						if (!uniqueNodes.contains(model.getDestino())) {
-							uniqueNodes.add(model.getDestino());
-						}
-						if (model.getPeso() != null) {
-							sumOfWeights += model.getPeso();
-						}
-					}
-					
-					if (uniqueNodes.size() != headerTotalNumberOfNodes) {
+					System.out.println(trailerNumberOfConnectionLines);
+					if ( !headerTotalNumberOfNodes.toString().equals(String.format("%02d", uniqueNodesTotal.size()))) {
 						throw new Exception("Número totais de nós inválido");
 					}
-					if (sumOfWeights != headerSumOfArestsWeights) {
+					if (!headerSumOfArestsWeights.toString().equals(sumOfWeights.toString())) {
 						throw new Exception("Soma dos pesos difere (Valor do Registro HEADER = NN e Soma dos Pesos = NN)");
+					}
+					if ( !headerTotalNumberOfNodes.toString().equals(String.format("%02d", trailerNumberOfConnectionLines))) {
+						throw new Exception("Número de linhas diferentes.(resumo)");
+					} else {
+						System.out.println("Número de linhas iguais.(resumo)");
+					}
+					if ( !headerSumOfArestsWeights.toString().equals(String.format("%02d", trailerNumberOfWeightLines))) {
+						throw new Exception("Número de linhas diferentes. (peso)");
+					} else {
+						System.out.println("Número de linhas iguais.(peso)");
 					}
 					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (RuntimeException e) {
+					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (Exception e) {
-					
+					e.printStackTrace();
 				}
 			
 				

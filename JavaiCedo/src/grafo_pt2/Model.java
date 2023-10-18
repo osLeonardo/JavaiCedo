@@ -2,20 +2,20 @@ package grafo_pt2;
 
 public class Model {
 	private String identificador;
-	private Integer origem;
-	private Integer destino;
+	private String origem;
+	private String destino;
 	private Integer peso;
 	
 	
 	
-	public Model(String identificador, Integer origem, Integer destino, Integer peso) {
+	public Model(String identificador, String origem, String destino, Integer peso) {
 		this.identificador = identificador;
 		this.origem = origem;
 		this.destino = destino;
 		this.peso = peso;
 	}
 	
-	public Model(String identificador, Integer origem, Integer destino) {
+	public Model(String identificador, String origem, String destino) {
 		this.identificador = identificador;
 		this.origem = origem;
 		this.destino = destino;
@@ -27,16 +27,16 @@ public class Model {
 	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
 	}
-	public Integer getOrigem() {
+	public String getOrigem() {
 		return origem;
 	}
-	public void setOrigem(Integer origem) {
+	public void setOrigem(String origem) {
 		this.origem = origem;
 	}
-	public Integer getDestino() {
+	public String getDestino() {
 		return destino;
 	}
-	public void setDestino(Integer destino) {
+	public void setDestino(String destino) {
 		this.destino = destino;
 	}
 	public Integer getPeso() {
