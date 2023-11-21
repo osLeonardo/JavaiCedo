@@ -2,6 +2,7 @@ package graphic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -22,6 +23,14 @@ public class busca extends JFrame{
 		setTitle("Searching");
 		getContentPane().setLayout(null);
 		
+		
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		createComponents();
+	}
+
+	private void createComponents() {
 		JLabel lblBusca = new JLabel("Buscar:");
 		lblBusca.setBounds(30, 11, 40, 25);
 		getContentPane().add(lblBusca);
@@ -51,7 +60,7 @@ public class busca extends JFrame{
 		btnProcess.setBounds(240, 119, 40, 25);
 		getContentPane().add(btnProcess);
 		
-		JButton btnSearch = new JButton("Buscar");
+		final JButton btnSearch = new JButton("Buscar");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -121,11 +130,29 @@ public class busca extends JFrame{
 			}
 		));
 		table.getColumnModel().getColumn(4).setResizable(false);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		createComponents();
-	}
 
-	private void createComponents() {}
+		btnProcess = new JButton(new AbstractAction(("PROCESS")) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				var graph = GraphFactory.createGraphFromRouteFile(textField.getText());
+				var source = JOptionPane.showInputDialog("SOURCE ex(A1)");
+				var target = JOptionPane.showInputDialog("TARGET ex(B2)");
+				Double distance = GraphFactory.shortestDistance(graph, source, target);
+				JOptionPane.showMessageDialog(null, source +" => "+target+" = " +distance+"km");
+			}
+		});
+		btnProcess.setBounds(620, 10, 160, 25);
+		getContentPane().add(btnProcess);
+
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				int result = chooser.showOpenDialog(btnSearch);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					File selectedFolder = chooser.getSelectedFile();
+					textField.setText(selectedFolder.getAbsolutePath());
+				}
+			}
+		});
+	}
 }
